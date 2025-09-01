@@ -1,0 +1,12 @@
+@font-face {
+    font-family: 'JetBrains Mono Bold';
+    src: url('../assets/fonts/static/JetBrainsMono-Bold.ttf') format('truetype');
+    font-weight: 200;
+}
+@font-face {
+    font-family: 'JetBrains Mono BoldItalic';
+     src: url('../assets/fonts/static/JetBrainsMono-BoldItalic.ttf') format('truetype');
+}
+
+$font-bold-italic: 'JetBrains Mono BoldItalic';
+$font-bold: 'JetBrains Mono Bold';

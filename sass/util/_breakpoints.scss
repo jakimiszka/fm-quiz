@@ -1,0 +1,32 @@
+$breakpoints-up: (
+  'small': 480px,   // -> em's / 16px = 30em
+  'medium': 820px,  // -> em's / 16px = 51.25em
+  'large': 1024px // -> em's / 16px = 64em
+);
+
+$breakpoints-down: (
+  'small': 43.7485em,   // -> em's / 16px = 30em
+  'medium': 56.24875em,  // -> em's / 16px = 51.25em
+  'large': 89.99875em // -> em's / 16px = 64em
+);
+
+
+@mixin breakpoint($name) {
+  @if map-has-key($breakpoints-up, $name) {
+    @media (min-width: map-get($breakpoints-up, $name)) {
+      @content;
+    }
+  } @else {
+    @warn "Breakpoint '#{$name}' not found in \$breakpoints-up.";
+  }
+}
+
+@mixin breakpoint-down($name) {
+  @if map-has-key($breakpoints-down, $name) {
+    @media (max-width: map-get($breakpoints-down, $name)) {
+      @content;
+    }
+  } @else {
+    @warn "Breakpoint '#{$name}' not found in \$breakpoints-down.";
+  }
+}

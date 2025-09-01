@@ -1,0 +1,33 @@
+@use '../util' as u;
+
+$font-size-1: 9rem;         // 144px
+$font-size-2: 4rem;         // 64px
+$font-size-3: 2.25rem;      // 36px
+$font-size-4: 1.75rem;      // 28px
+$font-size-5: 1.5rem;       // 24px
+$font-size-6: 1.25rem;      // 20px
+
+$font-size-1-mobile: 2.5rem;    // 40px
+$font-size-2-mobile: 1.25rem;    // 20px
+$font-size-3-mobile: 1.125rem;  // 18px    
+$font-size-4-mobile: 0.875rem;  // 14px
+
+$line-height-1: 100%;
+$line-height-2: 120%;       
+$line-height-3: 150%;     
+
+$letter-spacing: 0;
+
+h1,h2,h3{
+    margin: 0;
+}
+
+p{
+    margin: 0;
+}
+
+a, 
+a:visited, 
+a:active{
+    text-decoration: none;
+}
