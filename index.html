@@ -8,22 +8,54 @@
   <title>Frontend Mentor | Frontend quiz app</title>
 </head>
 <body>
+  <div class="main-card">
+    <hader class="main-card__header">
+      <div class="main-card__header--title">
+        <img src="../assets/images/icon-accessibility.svg" alt="Accessibility icon"/>
+        <p>Accessibility</p>
+      </div>
+      <div class="main-card__header--dark-mode-switch">
+        <img src="../assets/images/icon-sun-dark.svg"/>
+        <label class="switch">
+          <input type="checkbox">
+          <span class="slider round"></span>
+        </label>
+        <img src="../assets/images/icon-moon-dark.svg"/>
+      </div>
+    </hader>
+    <main class="main-card__main">
+      <div class="main-card__main--wrapper">
+        <p class="main-card__main--wrapper--title">
+          Welcome to the 
+        </p>
+        <p class="main-card__main--wrapper--title bold">
+          Frontend Quiz!
+        </p>
+        <p class="main-card__main--wrapper--subtitle">Pick a subject to get started.</p>
+      </div>
+      
+      <div class="main-card__main--topics">
+        <div class="main-card__main--topics--item">
+          <img src="../assets/images/icon-html.svg" alt="HTML icon"/>
+          HTML
+        </div>
+        <div class="main-card__main--topics--item">
+          <img src="../assets/images/icon-css.svg" alt="CSS icon"/>
+          CSS
+        </div>
+        <div class="main-card__main--topics--item">
+          <img src="../assets/images/icon-js.svg" alt="JavaScript icon"/>
+          JavaScript
+        </div>
+        <div class="main-card__main--topics--item">
+          <img src="../assets/images/icon-accessibility.svg" alt="Accessibility icon"/>
+          Accessibility
+        </div>
+      </div>
+    </main>
+  </div>
 
-  <!-- Quiz menu start -->
-
-  Welcome to the Frontend Quiz!
-  Pick a subject to get started.
-
-  HTML
-  CSS
-  JavaScript
-  Accessibility
-
-  <!-- Quiz menu end -->
-
-  <!-- Quiz question start -->
-
-  Question <!-- number --> of 10
+  <!-- Question - of 10
 
   A
   B
@@ -32,16 +64,12 @@
 
   Submit answer
 
-  <!-- Quiz question end -->
-
-  <!-- Quiz completed start -->
 
   Quiz completed
   You scored...
+  
+  out of 10 -->
 
-  <!-- score --> out of 10
-
-  <!-- Quiz completed end -->
   <script defer src="js/script.js"></script>
 </body>
 </html>

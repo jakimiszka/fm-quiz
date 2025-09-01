@@ -1,3 +1,90 @@
 @use "../util" as u;
 @use '../globals' as g;
 
+.main-card{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 10fr;
+    margin-inline: auto;
+    min-width: 375px;
+    max-width: 640px;
+    height: 100vh;
+
+    &__header{
+        display: flex;
+        justify-content: space-between;
+        padding: u.$spacing-200 0;
+        margin-inline: u.$spacing-300;
+        height: 72px;
+
+        &--title{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+        &--dark-mode-switch{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: .5rem;
+        }
+    }
+
+    &__main{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-inline: u.$spacing-300;
+        margin-top: u.$spacing-400;
+
+         &--wrapper{
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            width: 100%;
+            gap: u.$spacing-200;
+
+             &--title{
+                font-size: g.$font-size-1-mobile;
+                font-weight: 200;
+                line-height: 100%;
+            }
+            &--subtitle{
+                text-align: center;
+                font-size: g.$font-size-4-mobile;
+                font-weight: 200;
+                line-height: 120%;
+                font-family: 'Rubik-Italic';
+            }
+        }
+
+        &--topics{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            gap: u.$spacing-200;
+            margin-top: u.$spacing-500;
+
+            &--item{
+                display: flex;
+                justify-content: flex-start;
+                gap: u.$spacing-200;
+                padding-left: u.$spacing-300;
+                align-items: center;
+                height: 72px;
+                margin-inline: auto;
+                width: 100%;
+                background-color: var(--white);
+                font-size: g.$font-size-4-mobile;
+                box-shadow: 0px 0px 100px var(--grey-50);
+                border-radius: 20px;
+            }
+        }
+    }
+}
+
+.bold{
+    font-weight: 600;
+}

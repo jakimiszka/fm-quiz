@@ -12,12 +12,10 @@ html{
 body{  
     margin: 0;
     padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;   //u.$font-bold;
+    font-family: 'Rubik', sans-serif;
     height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-image: white;    //var(--gradient-1);
-    color: black;   //var(--white);
+    background-image: url('../assets/images/pattern-background-mobile-light.svg');
+    background-size: cover;
+    background-color: hsl(225, 100%, 94%);
+    color: black;  
 }

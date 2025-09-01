@@ -1,11 +1,23 @@
 @font-face {
-  font-family: "JetBrains Mono Bold";
-  src: url("../assets/fonts/static/JetBrainsMono-Bold.ttf") format("truetype");
+  font-family: "Rubik-Italic-static";
+  src: url("../assets/fonts/static/Rubik-Italic.ttf") format("truetype");
   font-weight: 200;
 }
 @font-face {
-  font-family: "JetBrains Mono BoldItalic";
-  src: url("../assets/fonts/static/JetBrainsMono-BoldItalic.ttf") format("truetype");
+  font-family: "Rubik-Medium-static";
+  src: url("../assets/fonts/static/Rubik-Medium.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Rubik-Regular-static";
+  src: url("../assets/fonts/static/Rubik-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Rubik-Italic";
+  src: url("../assets/fonts/Rubik-Italic-VariableFont_wght.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Rubik";
+  src: url("../assets/fonts/Rubik-VariableFont_wght.ttf") format("truetype");
 }
 html {
   box-sizing: border-box; /* padding and border are included in the width */
@@ -19,17 +31,20 @@ html {
 body {
   margin: 0;
   padding: 0;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Rubik", sans-serif;
   height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-image: white;
+  background-image: url("../assets/images/pattern-background-mobile-light.svg");
+  background-size: cover;
+  background-color: hsl(225, 100%, 94%);
   color: black;
 }
 
-h1, h2, h3 {
+h1 {
+  margin: 0;
+  font-weight: 200;
+}
+
+h2, h3 {
   margin: 0;
 }
 
@@ -62,4 +77,145 @@ a:active {
   --orange-400: hsl(22, 100%, 60%);
   --orange-50: hsl(27, 100%, 96%);
   --red-500: hsl(0, 82%, 63%);
+}
+
+.main-card {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 10fr;
+  margin-inline: auto;
+  min-width: 375px;
+  max-width: 640px;
+  height: 100vh;
+}
+.main-card__header {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 0;
+  margin-inline: 1.5rem;
+  height: 72px;
+}
+.main-card__header--title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.main-card__header--dark-mode-switch {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+}
+.main-card__main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-inline: 1.5rem;
+  margin-top: 2rem;
+}
+.main-card__main--wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  gap: 1rem;
+}
+.main-card__main--wrapper--title {
+  font-size: 2.5rem;
+  font-weight: 200;
+  line-height: 100%;
+}
+.main-card__main--wrapper--subtitle {
+  text-align: center;
+  font-size: 0.875rem;
+  font-weight: 200;
+  line-height: 120%;
+  font-family: "Rubik-Italic";
+}
+.main-card__main--topics {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 1rem;
+  margin-top: 2.5rem;
+}
+.main-card__main--topics--item {
+  display: flex;
+  justify-content: flex-start;
+  gap: 1rem;
+  padding-left: 1.5rem;
+  align-items: center;
+  height: 72px;
+  margin-inline: auto;
+  width: 100%;
+  background-color: var(--white);
+  font-size: 0.875rem;
+  box-shadow: 0px 0px 100px var(--grey-50);
+  border-radius: 20px;
+}
+
+.bold {
+  font-weight: 600;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 26px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(33px);
+  -ms-transform: translateX(33px);
+  transform: translateX(33px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
 }/*# sourceMappingURL=styles.css.map */

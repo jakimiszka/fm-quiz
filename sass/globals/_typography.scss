@@ -18,7 +18,12 @@ $line-height-3: 150%;
 
 $letter-spacing: 0;
 
-h1,h2,h3{
+h1{
+    margin: 0;
+    font-weight: 200;
+}
+
+h2,h3{
     margin: 0;
 }
 

@@ -1,12 +1,24 @@
+// static
 @font-face {
-    font-family: 'JetBrains Mono Bold';
-    src: url('../assets/fonts/static/JetBrainsMono-Bold.ttf') format('truetype');
+    font-family: 'Rubik-Italic-static';
+    src: url('../assets/fonts/static/Rubik-Italic.ttf') format('truetype');
     font-weight: 200;
 }
 @font-face {
-    font-family: 'JetBrains Mono BoldItalic';
-     src: url('../assets/fonts/static/JetBrainsMono-BoldItalic.ttf') format('truetype');
+    font-family: 'Rubik-Medium-static';
+     src: url('../assets/fonts/static/Rubik-Medium.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Rubik-Regular-static';
+     src: url('../assets/fonts/static/Rubik-Regular.ttf') format('truetype');
 }
 
-$font-bold-italic: 'JetBrains Mono BoldItalic';
-$font-bold: 'JetBrains Mono Bold';
+// font-variables
+@font-face {
+    font-family: 'Rubik-Italic';
+    src: url('../assets/fonts/Rubik-Italic-VariableFont_wght.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Rubik';
+    src: url('../assets/fonts/Rubik-VariableFont_wght.ttf') format('truetype');
+}
