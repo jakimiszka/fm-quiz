@@ -14,8 +14,12 @@ body{
     padding: 0;
     font-family: 'Rubik', sans-serif;
     height: 100vh;
-    background-image: url('../assets/images/pattern-background-mobile-light.svg');
+    background-image: var(--bg-img-body);
     background-size: cover;
-    background-color: hsl(225, 100%, 94%);
-    color: black;  
+    background-color: var(--bg-primary);
+    color: var(--text-primary);  
+}
+
+.dark-mode-body{
+    background-image: url('../assets/images/pattern-background-mobile-dark.svg');
 }

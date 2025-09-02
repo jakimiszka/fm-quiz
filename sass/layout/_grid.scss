@@ -11,22 +11,36 @@
     height: 100vh;
 
     &__header{
-        display: flex;
-        justify-content: space-between;
-        padding: u.$spacing-200 0;
+        padding: u.$spacing-200;
         margin-inline: u.$spacing-300;
         height: 72px;
 
         &--title{
-            display: flex;
-            flex-direction: row;
+            display: inline-flex;
             align-items: center;
+            display: none;
         }
+      
         &--dark-mode-switch{
-            display: flex;
-            flex-direction: row;
-            align-items: center;
+            display: inline-flex;
+            float: right;
+            height: 100%;
             gap: .5rem;
+
+            &--sun{
+                height: 25px;
+                width: 25px;
+                background-image: var(--sun-icon);
+            }
+            &--moon{
+                height: 25px;
+                width: 25px;
+                background-image: var(--moon-icon);
+            }
+        }
+        &--dark-mode-switch {
+            display: flex;
+            align-items: center;
         }
     }
 
@@ -55,6 +69,7 @@
                 font-weight: 200;
                 line-height: 120%;
                 font-family: 'Rubik-Italic';
+                color: var(--text-secondary);
             }
         }
 
@@ -76,9 +91,9 @@
                 height: 72px;
                 margin-inline: auto;
                 width: 100%;
-                background-color: var(--white);
+                background-color: var(--bg-secondary);
                 font-size: g.$font-size-4-mobile;
-                box-shadow: 0px 0px 100px var(--grey-50);
+                box-shadow: 0px 16px 40px var(--shadow);
                 border-radius: 20px;
             }
         }
@@ -87,4 +102,8 @@
 
 .bold{
     font-weight: 600;
+}
+
+.dark-mode-topics, .dark-mode-topics--item{
+    background-color: var(--blue-900);
 }

@@ -1,10 +1,8 @@
 :root{
     --black: black;
     --white: white; 
-
     --grey-500: hsl(219, 13%, 44%);
     --grey-50: hsl(220, 38%, 97%);
-
     --blue-950: hsl(214, 24%, 23%);
     --blue-900: hsl(216, 25%, 25%);
     --blue-850: hsl(215, 27%, 32%);
@@ -12,15 +10,60 @@
     --blue-300: hsl(216, 47%, 78%);
     --blue-100: hsl(220, 50%, 95%);
     --blue-50: hsl(225, 100, 96%);
-
     --green-500: hsl(151, 68%, 52%);
     --green-100: hsl(151, 88%, 94%);
-
     --purple-600: hsl(277, 91%, 56%);
     --purple-100: hsl(278, 100%, 95%);
-
     --orange-400: hsl(22, 100%, 60%);
     --orange-50: hsl(27, 100%, 96%);
-
     --red-500: hsl(0, 82%, 63%);   
+
+    --mobile-img-body-light: url('../assets/images/pattern-background-mobile-light.svg');
+    --mobile-img-body-dark: url('../assets/images/pattern-background-mobile-dark.svg');
+    --tablet-img-body-light: url('../assets/images/pattern-background-tablet-light.svg');
+    --tablet-img-body-dark: url('../assets/images/pattern-background-tablet-dark.svg');
+    --desktop-img-body-light: url('../assets/images/pattern-background-desktop-light.svg');
+    --desktop-img-body-dark: url('../assets/images/pattern-background-desktop-dark.svg');
+    --icon-moon-light: url('../assets/images/icon-moon-light.svg');
+    --icon-moon-dark: url('../assets/images/icon-moon-dark.svg');
+    --icon-sun-light: url('../assets/images/icon-sun-light.svg');
+    --icon-sun-dark: url('../assets/images/icon-sun-dark.svg');
+    --shadow-light: hsl(220, 29%, 66%, .2);
+    --shadow-dark: hsl(216, 25%, 25%, .2);
+
+    --bg-primary: var(--grey-50);
+    --bg-img-body: var(--mobile-img-body-light);
+    --bg-secondary: var(--white);
+    --text-primary: var(--blue-900);
+    --text-secondary: var(--blue-300);
+    --sun-icon: var(--icon-sun-dark);
+    --moon-icon: var(--icon-moon-dark);
+    --shadow: var(--shadow-light);
+
+    --text-accent: #0d6efd;
+    --bg-tertiary: #e9ecef;
+    --border-color: #dee2e6;
+
+    --card-bg: #ffffff;
+    --button-bg: #0d6efd;
+    --button-text: #ffffff;
+}
+
+[data-theme="dark"] {
+    --bg-primary: var(--blue-900);
+    --bg-img-body: var(--mobile-img-body-dark);
+    --bg-secondary: var(--blue-850);
+    --text-primary: var(--white);
+    --text-secondary: var(--blue-300);
+    --sun-icon: var(--icon-sun-light);
+    --moon-icon: var(--icon-moon-light);
+    --shadow: var(--shadow-dark);
+
+    --bg-tertiary: #2d2d2d;
+    --text-accent: #4dabf7;
+    --border-color: #404040;
+    --card-bg: #1e1e1e;
+    --button-bg: #4dabf7;
+    --button-text: #000000;
+    --button-hover: #339af0;
 }
