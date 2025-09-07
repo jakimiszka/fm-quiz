@@ -16,13 +16,13 @@ const qestion_number = document.querySelector('.question_number');
 // quiz answers
 const answer_btns = document.querySelectorAll('.answer_btn');
 
-let quiz_counter = 0;
-let points = 0;
-let answers = [];
-
 const DataStore = {
   data: null,
   questions: [],
+  category: '',
+  answers: [],
+  quiz_counter: 0,
+  question_amount: 0,
 
   init() {
     fetch('data.json')
@@ -36,9 +36,39 @@ const DataStore = {
   getData() {
     return this.data;
   },
-
+  setCategory(category){
+    this.category = category;
+    return this.category;
+  },
+  getCategory(){
+    return this.category;
+  },
   getCategoryQuestions(category){
     return this.data.quizzes.filter(quiz => quiz.title === category)[0];
+  },
+  getQuestion(index){
+    return this.getCategoryQuestions(this.category).questions[index];
+  },
+  setQuestionAmount(amount){
+    this.question_amount = amount;
+  },
+
+  getCounter(){
+    return this.quiz_counter;
+  },
+  nextQuestion(){
+    if(this.quiz_counter <= this.question_amount){
+        this.quiz_counter++;
+    }else{
+        this.resetCounter();
+    }
+    return this.quiz_counter;
+  },
+  resetCounter(){
+    this.quiz_counter = 0;
+  },
+  saveAnswer(answer){
+    this.answers.push(answer);
   }
 };
 
@@ -58,41 +88,59 @@ function updateTitle(imgPath, category){
     title.style.display = 'inline-flex';
 }
 
-function updateQuiz(question, number){
+function updateTitleAndQuiestion(question, number){
     quiz_question.textContent = question;
     qestion_number.textContent = number;
 }
 
-function updateAnswers(options){
+function updateOptions(options){
     answer_btns.forEach((btn, index) => {
         btn.textContent = options[index];
     })
 }
 
+function storeAnswer(question_index, answer){
+    answers.push({
+        index: question_index,
+        answer: answer
+    });
+}
+
 btns.forEach(btn => {
     btn.addEventListener('click', () => {
-        const category = btn.dataset.category;
+        const category = DataStore.setCategory(btn.dataset.category);
         const quiz = DataStore.getCategoryQuestions(category);
-        const question = quiz.questions[quiz_counter];
+        const question_index = DataStore.getCounter();
+        DataStore.setQuestionAmount(quiz.questions.length);
+        const question = quiz.questions[question_index];
         console.log(question);
 
         updateTitle(quiz.icon, quiz.title);
-        updateQuiz(question.question, Number(quiz_counter)+1);
-        updateAnswers(question.options);
+        updateTitleAndQuiestion(question.question, question_index + 1);
+        updateOptions(question.options);
 
         displayQuiz();
-        quiz_counter++;
     })
 })
 
 answer_btns.forEach(btn => {
     btn.addEventListener('click', (e)=>{
-        let answer = {
-            number: Number(qestion_number.textContent),
-            answer: e.target.textContent
+        const quiz_counter = DataStore.getCounter();
+        if(quiz_counter >= DataStore.question_amount - 1){
+            console.log('quiz completed - ur score is ' + DataStore.answers.length);
+            //TODO: summerize score
+        }else{
+            const answer = {
+                index: quiz_counter,
+                answer: e.target.textContent
+            }
+            DataStore.saveAnswer(answer);
+            //TODO: check answer && accumulate scores
+            const question_index = DataStore.nextQuestion();
+            const question = DataStore.getQuestion(question_index)
+            updateTitleAndQuiestion(question.question, question_index + 1);
+            updateOptions(question.options);
         }
-        answers.push(answer);
-        // display next question
     });
 });
 
