@@ -111,13 +111,41 @@ a:active {
   --shadow: var(--shadow-dark);
 }
 
+.btn {
+  cursor: pointer;
+  border: none;
+}
+
+.submit_btn {
+  height: 72px;
+  width: 100%;
+}
+
+.template-qestion {
+  display: none;
+  gap: 1.5rem;
+}
+
+.template-quiz {
+  display: none;
+  flex-direction: column;
+  gap: 1rem;
+}
+
 .main-card {
   display: flex;
   flex-direction: column;
   width: 100;
-  max-width: 640px;
+  max-width: 420px;
   height: 100vh;
   margin-inline: auto;
+}
+@media (min-width: 820px) {
+  .main-card {
+    max-width: 720px;
+    position: relative;
+    top: 4rem;
+  }
 }
 @media (min-width: 1024px) {
   .main-card {
@@ -128,13 +156,11 @@ a:active {
 }
 .main-card__header {
   padding: 1rem;
-  margin-inline: 1.5rem;
   height: 72px;
 }
 .main-card__header--title {
-  display: inline-flex;
-  align-items: center;
   display: none;
+  align-items: center;
 }
 .main-card__header--dark-mode-switch {
   display: inline-flex;
@@ -229,8 +255,10 @@ a:active {
   align-items: center;
   height: 72px;
   width: 100%;
+  border: none;
   background-color: var(--bg-secondary);
   font-size: 1.125rem;
+  color: var(--text-primary);
   box-shadow: 0px 16px 40px var(--shadow);
   border-radius: 20px;
 }
