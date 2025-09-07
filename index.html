@@ -25,18 +25,6 @@
     </hader>
     <main class="main-card__main">
 
-      <!-- template-qestion -->
-      <div class="template-qestion">
-        <div class="template-qestion--wrapper">
-          <p class="template-qestion--wrapper--title">
-            Question <a class="question_number">1</a> of 10
-          </p>
-          <p class="template-qestion--wrapper--subtitle">
-            <p class="quiz_question">What is the correct HTML element for inserting a line break?</p>
-          </p>
-        </div>
-      </div>
- 
       <div class="main-card__main--wrapper">
         <p class="main-card__main--wrapper--title">
           Welcome to the 
@@ -46,25 +34,6 @@
         </p>
         <p class="main-card__main--wrapper--subtitle">Pick a subject to get started.</p>
       </div>
-
-      <!-- template-quiz -->
-        <div class="template-quiz">
-          <button class="answer_btn">
-            <div class="answer_type">A</div>
-          </button>
-          <button class="answer_btn">
-            <div class="answer_type">A</div>
-          </button>
-          <button class="answer_btn">
-            <div class="answer_type">A</div>
-          </button>
-          <button class="answer_btn">
-            <div class="answer_type">A</div>
-          </button>
-          <button class="submit_btn" data-bind="submit.value">
-            {{submit.value}}
-          </button>
-        </div>
       
       <div class="main-card__main--topics">
         <button class="main-card__main--topics--item btn" data-category="HTML">
@@ -84,24 +53,61 @@
           Accessibility
         </button>
       </div>
+
+      <!-- template-qestion -->
+      <div class="template-qestion">
+        <div class="template-qestion--wrapper">
+          <p class="template-qestion--wrapper--title">
+            Question <a class="question_number">1</a> of 10
+          </p>
+          <p class="template-qestion--wrapper--subtitle">
+            <p class="quiz_question">What is the correct HTML element for inserting a line break?</p>
+          </p>
+        </div>
+      </div>
+
+      <!-- template-quiz -->
+        <div class="template-quiz">
+          <button class="answer_btn">
+            <div class="answer_type">A</div>
+          </button>
+          <button class="answer_btn">
+            <div class="answer_type">B</div>
+          </button>
+          <button class="answer_btn">
+            <div class="answer_type">C</div>
+          </button>
+          <button class="answer_btn">
+            <div class="answer_type">D</div>
+          </button>
+          <button class="submit_btn" data-bind="submit.value">
+            Submit Answer
+          </button>
+        </div>
+
+         <!-- template-results-title -->
+      <div class="template-results-title">
+          <p class="results_title1">
+            Quiz completed 
+          </p>
+          <p class="results_title1 bold">
+            You scored...
+          </p>
+      </div>
+
+      <!-- template-results-score -->
+        <div class="template-results-score">
+          <div class="score">
+            <p class="score--title">You scored</p>
+            <p class="score--number">5</p>
+            <p class="score--subtitle">out of 10</p>
+          </div>
+          <button class="submit_btn" data-bind="submit.value">
+            Play Again
+          </button>
+        </div>
     </main>
   </div>
-
-  <!-- Question - of 10
-
-  A
-  B
-  C
-  D
-
-  Submit answer
-
-
-  Quiz completed
-  You scored...
-  
-  out of 10 -->
-
   <script defer src="js/script.js"></script>
 </body>
 </html>

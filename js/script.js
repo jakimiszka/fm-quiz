@@ -4,7 +4,7 @@ const btns = document.querySelectorAll('.btn');
 const title = document.querySelector('.main-card__header--title');
 const category_icon = document.querySelector('.category_icon');
 const category_title = document.querySelector('.category_title');
-// home page
+// categories page
 const title_card = document.querySelector('.main-card__main--wrapper');
 const question_card = document.querySelector('.main-card__main--topics');
 // quiz templates
@@ -74,12 +74,12 @@ const DataStore = {
 
 DataStore.init();
 
-// args: category, title, questions
 function displayQuiz(){
     title_card.style.display = 'none';
     question_card.style.display = 'none';
     question.style.display = 'flex';
     options.style.display = 'flex';
+    // TODO: logic to display quiz or categories
 }
 
 function updateTitle(imgPath, category){
@@ -99,21 +99,14 @@ function updateOptions(options){
     })
 }
 
-function storeAnswer(question_index, answer){
-    answers.push({
-        index: question_index,
-        answer: answer
-    });
-}
-
+// QUIZ CETEGORY
 btns.forEach(btn => {
     btn.addEventListener('click', () => {
         const category = DataStore.setCategory(btn.dataset.category);
         const quiz = DataStore.getCategoryQuestions(category);
         const question_index = DataStore.getCounter();
         DataStore.setQuestionAmount(quiz.questions.length);
-        const question = quiz.questions[question_index];
-        console.log(question);
+        const question = DataStore.getQuestion(question_index);
 
         updateTitle(quiz.icon, quiz.title);
         updateTitleAndQuiestion(question.question, question_index + 1);
@@ -121,8 +114,9 @@ btns.forEach(btn => {
 
         displayQuiz();
     })
-})
+});
 
+// PICK ANSWER
 answer_btns.forEach(btn => {
     btn.addEventListener('click', (e)=>{
         const quiz_counter = DataStore.getCounter();
@@ -144,6 +138,7 @@ answer_btns.forEach(btn => {
     });
 });
 
+// DARL - LIGHT MODE
 toggle.addEventListener('change', () => {
   const theme = toggle.checked ? 'dark' : 'light';
   console.log(theme);

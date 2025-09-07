@@ -1,29 +1,6 @@
 @use "../util" as u;
 @use '../globals' as g;
 
-.btn{
-    cursor: pointer;
-    border: none;
-    // color: var(--text-primary);
-    // background-color: transparent;
-    // height: 72px;
-    // width: 100%;
-}
-.submit_btn{
-    height: 72px;
-    width: 100%;
-}
-.template-qestion{
-    display: none;
-    gap: u.$spacing-300;
-}
-
-.template-quiz{
-    display: none;
-    flex-direction: column;
-    gap: 1rem;
-}
-
 .main-card{
     display: flex;
     flex-direction: column;
@@ -163,4 +140,35 @@
 
 .dark-mode-topics, .dark-mode-topics--item{
     background-color: var(--blue-900); 
+}
+
+.btn{
+    cursor: pointer;
+    border: none;
+}
+.submit_btn{
+    height: 72px;
+    width: 100%;
+}
+.template-qestion{
+    display: none;
+    gap: u.$spacing-300;
+}
+
+.template-quiz{
+    display: none;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.template-results-title{
+    display: none;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.template-results-score{
+    display: none;
+    flex-direction: column;
+    gap: 1rem;
 }
