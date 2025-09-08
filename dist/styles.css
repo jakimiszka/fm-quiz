@@ -98,6 +98,8 @@ a:active {
   --sun-icon: var(--icon-sun-dark);
   --moon-icon: var(--icon-moon-dark);
   --shadow: var(--shadow-light);
+  --question-number: var(--grey-500);
+  --question-conent: var(--blue-900);
 }
 
 [data-theme=dark] {
@@ -109,12 +111,14 @@ a:active {
   --sun-icon: var(--icon-sun-light);
   --moon-icon: var(--icon-moon-light);
   --shadow: var(--shadow-dark);
+  --question-number: var(--blue-300);
+  --question-conent: var(--white);
 }
 
 .main-card {
   display: flex;
   flex-direction: column;
-  width: 100;
+  width: 100%;
   max-width: 420px;
   height: 100vh;
   margin-inline: auto;
@@ -140,6 +144,7 @@ a:active {
 .main-card__header--title {
   display: none;
   align-items: center;
+  gap: 0.5rem;
 }
 .main-card__header--dark-mode-switch {
   display: inline-flex;
@@ -172,9 +177,9 @@ a:active {
 @media (min-width: 1024px) {
   .main-card__main {
     max-width: 1160px;
-    grid-template-columns: auto 1fr;
+    grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
-    column-gap: 8rem;
+    gap: 8rem;
   }
 }
 .main-card__main--wrapper {
@@ -183,16 +188,19 @@ a:active {
   align-items: flex-start;
   height: auto;
   gap: 1rem;
+  width: 100%;
 }
 @media (min-width: 1024px) {
   .main-card__main--wrapper {
     margin-top: 2.5rem;
+    width: 100%;
   }
 }
 .main-card__main--wrapper--title {
   font-size: 2.5rem;
   font-weight: 200;
   line-height: 100%;
+  width: 100%;
 }
 @media (min-width: 1024px) {
   .main-card__main--wrapper--title {
@@ -209,7 +217,7 @@ a:active {
 }
 @media (min-width: 1024px) {
   .main-card__main--wrapper--subtitle {
-    font-size: 20px;
+    font-size: 16px;
   }
 }
 .main-card__main--topics {
@@ -226,7 +234,7 @@ a:active {
     max-width: 700px;
   }
 }
-.main-card__main--topics--item {
+.main-card__main--topics--item, .answer_btn {
   display: flex;
   justify-content: flex-start;
   gap: 1rem;
@@ -242,10 +250,6 @@ a:active {
   border-radius: 20px;
 }
 
-.bold {
-  font-weight: 600;
-}
-
 .dark-mode-topics, .dark-mode-topics--item {
   background-color: var(--blue-900);
 }
@@ -256,13 +260,31 @@ a:active {
 }
 
 .submit_btn {
-  height: 72px;
+  height: 56px;
   width: 100%;
 }
 
-.template-qestion {
+.template-question {
   display: none;
+  flex-direction: column;
   gap: 1.5rem;
+  margin-bottom: 40px;
+  width: 100%;
+}
+@media (min-width: 1024px) {
+  .template-question {
+    width: 100%;
+  }
+}
+.template-question--title {
+  font-size: 0.875rem;
+  color: var(--question-number);
+}
+.template-question--question {
+  font-size: 36px;
+  font-weight: 500;
+  color: var(--question-conent);
+  line-height: 120%;
 }
 
 .template-quiz {
@@ -271,16 +293,88 @@ a:active {
   gap: 1rem;
 }
 
+.asnwer_option {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--grey-50);
+  color: var(--grey-500);
+  border-radius: 10px;
+}
+
+.answer_content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: left;
+}
+
+.submit_btn {
+  background-color: var(--purple-600);
+  color: white;
+  font-size: 1.25rem;
+  font-weight: 500;
+  border-radius: 20px;
+  border: none;
+}
+
 .template-results-title {
   display: none;
   flex-direction: column;
   gap: 1rem;
+  font-size: 40px;
+  margin-bottom: 2rem;
+}
+
+.results_title {
+  font-weight: 200;
 }
 
 .template-results-score {
   display: none;
   flex-direction: column;
   gap: 1rem;
+}
+
+.score--title {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.bold {
+  font-weight: 600;
+}
+
+.score--card {
+  background-color: var(--bg-secondary);
+  box-shadow: 0px 16px 40px var(--shadow);
+  border-radius: 20px;
+  padding: 1.5rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 3rem;
+  margin-bottom: 2rem;
+}
+@media (min-width: 1024px) {
+  .score--card {
+    width: 100%;
+  }
+}
+
+.score--number {
+  font-size: 144px;
+  font-weight: 600;
+  line-height: 100%;
 }
 
 .switch {

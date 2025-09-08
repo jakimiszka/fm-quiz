@@ -17,7 +17,7 @@
       <div class="main-card__header--dark-mode-switch">
         <div class="main-card__header--dark-mode-switch--sun"></div>
         <label class="switch">
-          <input type="checkbox" />
+          <input type="checkbox" name="dark-mode"/>
           <span class="slider round"></span>
         </label>
         <div class="main-card__header--dark-mode-switch--moon"></div>
@@ -55,30 +55,31 @@
       </div>
 
       <!-- template-qestion -->
-      <div class="template-qestion">
-        <div class="template-qestion--wrapper">
-          <p class="template-qestion--wrapper--title">
-            Question <a class="question_number">1</a> of 10
-          </p>
-          <p class="template-qestion--wrapper--subtitle">
-            <p class="quiz_question">What is the correct HTML element for inserting a line break?</p>
-          </p>
-        </div>
+      <div class="template-question">
+        <p class="template-question--title">
+          Question <a class="question_number">1</a> of 10
+        </p>
+        <p class="template-question--question">What is the correct HTML element for inserting a line break?</p>
+        <div class="progress-bar">-------------</div>
       </div>
 
       <!-- template-quiz -->
         <div class="template-quiz">
           <button class="answer_btn">
-            <div class="answer_type">A</div>
+            <div class="asnwer_option">A</div> 
+            <div class="answer_content">{{}}</div>
           </button>
           <button class="answer_btn">
-            <div class="answer_type">B</div>
+            <div class="asnwer_option">B</div> 
+            <div class="answer_content">{{}}</div>
           </button>
           <button class="answer_btn">
-            <div class="answer_type">C</div>
+            <div class="asnwer_option">C</div> 
+            <div class="answer_content">{{}}</div>
           </button>
           <button class="answer_btn">
-            <div class="answer_type">D</div>
+            <div class="asnwer_option">D</div> 
+            <div class="answer_content">{{}}</div>
           </button>
           <button class="submit_btn" data-bind="submit.value">
             Submit Answer
@@ -87,22 +88,25 @@
 
          <!-- template-results-title -->
       <div class="template-results-title">
-          <p class="results_title1">
+          <p class="results_title">
             Quiz completed 
           </p>
-          <p class="results_title1 bold">
+          <p class="results_title bold">
             You scored...
           </p>
       </div>
 
       <!-- template-results-score -->
         <div class="template-results-score">
-          <div class="score">
-            <p class="score--title">You scored</p>
+          <div class="score--card">
+            <div class="score--title">
+              <img class="category_icon" src="../assets/images/icon-accessibility.svg" alt="Accessibility icon"/>
+              <p class="category_title">Accessibility</p>
+            </div>
             <p class="score--number">5</p>
             <p class="score--subtitle">out of 10</p>
           </div>
-          <button class="submit_btn" data-bind="submit.value">
+          <button class="submit_btn restart_btn" data-bind="submit.value">
             Play Again
           </button>
         </div>

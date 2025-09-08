@@ -39,6 +39,9 @@
     --sun-icon: var(--icon-sun-dark);
     --moon-icon: var(--icon-moon-dark);
     --shadow: var(--shadow-light);
+
+    --question-number: var(--grey-500);
+    --question-conent: var(--blue-900);
 }
 
 [data-theme="dark"] {
@@ -50,4 +53,7 @@
     --sun-icon: var(--icon-sun-light);
     --moon-icon: var(--icon-moon-light);
     --shadow: var(--shadow-dark);
+
+    --question-number: var(--blue-300);
+    --question-conent: var(--white);
 }

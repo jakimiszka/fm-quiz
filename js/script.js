@@ -2,19 +2,25 @@ const toggle = document.querySelector('input[type="checkbox"]');
 const btns = document.querySelectorAll('.btn');
 // title
 const title = document.querySelector('.main-card__header--title');
-const category_icon = document.querySelector('.category_icon');
-const category_title = document.querySelector('.category_title');
+const category_icon = document.querySelectorAll('.category_icon');
+const category_title = document.querySelectorAll('.category_title');
 // categories page
 const title_card = document.querySelector('.main-card__main--wrapper');
 const question_card = document.querySelector('.main-card__main--topics');
 // quiz templates
-const question = document.querySelector('.template-qestion');
+const question = document.querySelector('.template-question');
 const options = document.querySelector('.template-quiz');
 //quiz question and number
-const quiz_question = document.querySelector('.quiz_question');
+const quiz_question = document.querySelector('.template-question--question');
 const qestion_number = document.querySelector('.question_number');
 // quiz answers
 const answer_btns = document.querySelectorAll('.answer_btn');
+const answer_content = document.querySelectorAll('.answer_content');
+// results
+const results_title = document.querySelector('.template-results-title');
+const results_score = document.querySelector('.template-results-score');
+//restart
+const restart_btn = document.querySelector('.restart_btn');
 
 const DataStore = {
   data: null,
@@ -82,9 +88,21 @@ function displayQuiz(){
     // TODO: logic to display quiz or categories
 }
 
-function updateTitle(imgPath, category){
-    category_icon.src = imgPath;
-    category_title.textContent = category;
+function displayResults(){
+    question.style.display = 'none';
+    options.style.display = 'none';
+    results_title.style.display = 'flex';
+    results_score.style.display = 'flex';
+    const quiz = DataStore.getCategoryQuestions(DataStore.getCategory());
+    console.log(quiz);
+    updateHeader(quiz.icon, quiz.title);
+}
+
+function updateHeader(imgPath, category){
+    for(let i=0; i<category_icon.length; i++){
+      category_icon[i].src = imgPath;
+      category_title[i].textContent = category;
+    }
     title.style.display = 'inline-flex';
 }
 
@@ -94,7 +112,7 @@ function updateTitleAndQuiestion(question, number){
 }
 
 function updateOptions(options){
-    answer_btns.forEach((btn, index) => {
+    answer_content.forEach((btn, index) => {
         btn.textContent = options[index];
     })
 }
@@ -108,7 +126,7 @@ btns.forEach(btn => {
         DataStore.setQuestionAmount(quiz.questions.length);
         const question = DataStore.getQuestion(question_index);
 
-        updateTitle(quiz.icon, quiz.title);
+        updateHeader(quiz.icon, quiz.title);
         updateTitleAndQuiestion(question.question, question_index + 1);
         updateOptions(question.options);
 
@@ -119,14 +137,15 @@ btns.forEach(btn => {
 // PICK ANSWER
 answer_btns.forEach(btn => {
     btn.addEventListener('click', (e)=>{
+        const answerContent = btn.getElementsByClassName('answer_content')[0];
         const quiz_counter = DataStore.getCounter();
         if(quiz_counter >= DataStore.question_amount - 1){
             console.log('quiz completed - ur score is ' + DataStore.answers.length);
-            //TODO: summerize score
+            displayResults();
         }else{
             const answer = {
                 index: quiz_counter,
-                answer: e.target.textContent
+                answer: answerContent.textContent
             }
             DataStore.saveAnswer(answer);
             //TODO: check answer && accumulate scores
@@ -138,11 +157,22 @@ answer_btns.forEach(btn => {
     });
 });
 
-// DARL - LIGHT MODE
+// DARK - LIGHT MODE
 toggle.addEventListener('change', () => {
   const theme = toggle.checked ? 'dark' : 'light';
   console.log(theme);
   document.body.setAttribute('data-theme', theme);
 });
+
+restart_btn.addEventListener('click', ()=>{
+    //reset everything
+    DataStore.resetCounter();
+    DataStore.answers = [];
+    results_title.style.display = 'none';
+    results_score.style.display = 'none';
+    title_card.style.display = 'flex';
+    question_card.style.display = 'flex';
+    title.style.display = 'none';
+})
 
 
