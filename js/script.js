@@ -236,7 +236,15 @@ function startTimer() {
     if (size > 100) {
       clearInterval(timer);
       size = 0;
-      // next question
+      const nextQuestionIndex = dataStore.nextQuestion();
+      const question = dataStore.getQuestion(nextQuestionIndex);
+      if (nextQuestionIndex >= dataStore.question_amount) {
+        console.log('quiz completed - ur score is ' + dataStore.answers.length);
+        displayResults(dataStore.answers.length);
+      } else {
+        updateTitleAndQuiestion(question.question, nextQuestionIndex + 1);
+        updateOptions(question.options);
+      }
     }
     inputTimer.value = size;
     setBackgroundSize(inputTimer);
