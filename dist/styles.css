@@ -293,6 +293,15 @@ a:active {
   gap: 1rem;
 }
 
+.answer_btn {
+  position: relative;
+  padding-left: 0.5rem;
+  gap: 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
 .asnwer_option {
   width: 40px;
   height: 40px;
@@ -305,12 +314,21 @@ a:active {
 }
 
 .answer_content {
-  width: 100%;
+  width: auto;
   height: 100%;
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  padding-left: 1rem;
   text-align: left;
+}
+
+.answer_icon {
+  width: 40px;
+  height: 40px;
+  display: none;
+  position: relative;
+  margin-left: auto;
 }
 
 .submit_btn {
@@ -386,14 +404,9 @@ a:active {
   color: var(--white);
 }
 
-.answer_icon {
-  width: 40px;
-  height: 40px;
-  display: none;
-}
-
 .correct {
   border: 1px solid var(--green-500);
+  width: 100%;
 }
 
 .correct_option {
@@ -403,6 +416,7 @@ a:active {
 
 .wrong {
   border: 1px solid var(--red-500);
+  width: 100%;
 }
 
 .wrong_option {
