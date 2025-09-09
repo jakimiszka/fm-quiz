@@ -65,7 +65,7 @@ function updateHeader(imgPath, category){
 function updateTitleAndQuiestion(question, number){
     quiz_question.textContent = question;
     qestion_number.textContent = number;
-    startTimer(0, console.log);
+    startTimer();
 }
 
 function updateOptions(options){
@@ -176,10 +176,7 @@ submit_btn.addEventListener('click', ()=>{
           submitValidation.style.display = 'flex';
           return;
       }else{
-          const timerVal = startTimer(getBackgroundSize(inputTimer), clearInterval);
-          setBackgroundSize(inputTimer)
-          inputTimer.value = timerVal;
-          console.log('timer val ' + getBackgroundSize(inputTimer));
+          stopTimer();
           if(answerContent !== questionAnswer){
               handleCorrectAnswer(null ,true, false);
 
@@ -226,23 +223,30 @@ function getBackgroundSize(input) {
 
   return size;
 }
-let size = 0
-function startTimer(sizeVal, callback) {
-  size = sizeVal || 0;
-  let timer = setInterval(() => {
-      size = size + 1;
-      callback(timer);
-      if (size > 100) {
-        clearInterval(timer);
-        return size;
-        //size = 0;
-        // next question
+let timer = null;
+let size = 0;
 
-      }
-      inputTimer.value = size;
-      setBackgroundSize(inputTimer);
+function startTimer() {
+  if (timer !== null) {
+    clearInterval(timer);
+  }
+  size = 0;
+  timer = setInterval(() => {
+    size = size + 1;
+    if (size > 100) {
+      clearInterval(timer);
+      size = 0;
+      // next question
+    }
+    inputTimer.value = size;
+    setBackgroundSize(inputTimer);
+    console.log(size);
   }, 100);
-  //clearInterval(timer);
 }
 
-//startTimer();
+function stopTimer() {
+  if (timer !== null) {
+    clearInterval(timer);
+    timer = null;
+  }
+}
