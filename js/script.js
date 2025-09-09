@@ -27,9 +27,10 @@ const results_score = document.querySelector('.template-results-score');
 const score_number = document.querySelector('.score--number');
 // restart
 const restart_btn = document.querySelector('.restart_btn');
-// correct / wrong icon
-const correct_icon_path = '../assets/images/icon-correct.svg';
-const wrong_icon_path = '../assets/images/icon-error.svg';
+// submit validation
+const submitValidation = document.querySelector('.submitValidation');
+//timer
+const inputTimer = document.querySelector("input[type='range']");
 
 // DATA STORE
 import DataStore from './dataStore.js';
@@ -40,7 +41,6 @@ function displayQuiz(){
     question_card.style.display = 'none';
     question.style.display = 'flex';
     options.style.display = 'flex';
-    // TODO: logic to display quiz or categories
 }
 
 function displayResults(score){
@@ -65,6 +65,7 @@ function updateHeader(imgPath, category){
 function updateTitleAndQuiestion(question, number){
     quiz_question.textContent = question;
     qestion_number.textContent = number;
+    startTimer(0, console.log);
 }
 
 function updateOptions(options){
@@ -109,6 +110,7 @@ btns.forEach(btn => {
 answer_btns.forEach(btn => {
     btn.addEventListener('click', (e)=>{
         btn.classList.toggle('selected');
+        submitValidation.style.display = 'none';
         answer_btns.forEach(btn => {
             if(btn !== e.currentTarget){
                 btn.classList.remove('selected');
@@ -160,35 +162,87 @@ submit_btn.addEventListener('click', ()=>{
     const question = dataStore.getQuestion(dataStore.getCounter());
     const questionAnswer = question.answer;
     const quiz_counter = dataStore.getCounter();
-    const answerContent = document.querySelector('.selected > .answer_content').textContent;
+    let selectedOption = null;
+    const answerContent = !!selectedOption ? selectedOption.textContent : null;
 
-    if(quiz_counter >= dataStore.question_amount - 1){
-        console.log('quiz completed - ur score is ' + dataStore.answers.length);
-        displayResults(dataStore.answers.length);
-    }else{
-        if(answerContent !== questionAnswer){
-            handleCorrectAnswer(null ,true, false);
+    const options = document.querySelectorAll('.answer_btn');
+    options.forEach(option => {
+        if(option.classList.contains('selected')){
+            selectedOption = option;
+        }
+    });
 
-             // find good answer and highlight it
-             answer_btns.forEach(option => {
+      if(selectedOption == null){
+          submitValidation.style.display = 'flex';
+          return;
+      }else{
+          const timerVal = startTimer(getBackgroundSize(inputTimer), clearInterval);
+          setBackgroundSize(inputTimer)
+          inputTimer.value = timerVal;
+          console.log('timer val ' + getBackgroundSize(inputTimer));
+          if(answerContent !== questionAnswer){
+              handleCorrectAnswer(null ,true, false);
+
+              // find good answer and highlight it
+              answer_btns.forEach(option => {
                 const answerContent = option.querySelector('.answer_content').textContent;
                 if(answerContent === questionAnswer){
                     handleCorrectAnswer(option, false, true);
                 }
-            });
-        }else{
+              });
+          }else{
             dataStore.saveAnswer(true);
             handleCorrectAnswer(null, true, true);
-        }
+          }
 
-        //TODO: freeze options during timeout
-        setTimeout(() => {
-            const question_index = dataStore.nextQuestion();
-            const question = dataStore.getQuestion(question_index)
-            updateTitleAndQuiestion(question.question, question_index + 1);
-            updateOptions(question.options);
-        }, 2000);
-        
-    }
+          //TODO: freeze options during timeout
+          setTimeout(() => {
+              const question_index = dataStore.nextQuestion();
+              const question = dataStore.getQuestion(question_index);
+                if(quiz_counter >= dataStore.question_amount - 1){
+                    console.log('quiz completed - ur score is ' + dataStore.answers.length);
+                    displayResults(dataStore.answers.length);
+                }else{
+                    updateTitleAndQuiestion(question.question, question_index + 1);
+                    updateOptions(question.options);
+                }    
+          }, 2000);
+        }
 });
 
+
+
+
+function setBackgroundSize(input) {
+  input.style.setProperty("--background-size", `${getBackgroundSize(input)}%`);
+}
+
+function getBackgroundSize(input) {
+  const min = +input.min || 0;
+  const max = +input.max || 100;
+  const value = +input.value;
+
+  const size = (value - min) / (max - min) * 100;
+
+  return size;
+}
+let size = 0
+function startTimer(sizeVal, callback) {
+  size = sizeVal || 0;
+  let timer = setInterval(() => {
+      size = size + 1;
+      callback(timer);
+      if (size > 100) {
+        clearInterval(timer);
+        return size;
+        //size = 0;
+        // next question
+
+      }
+      inputTimer.value = size;
+      setBackgroundSize(inputTimer);
+  }, 100);
+  //clearInterval(timer);
+}
+
+//startTimer();

@@ -424,6 +424,33 @@ a:active {
   color: var(--white);
 }
 
+.submitValidation {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+input[type=range] {
+  -webkit-appearance: none;
+  width: 100%;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+  height: 3px;
+  background: linear-gradient(to right, var(--purple-600), var(--purple-600)), #D7D7D7;
+  background-size: var(--background-size, 0%) 100%;
+  background-repeat: no-repeat;
+  border-radius: 5px;
+}
+
 .switch {
   position: relative;
   display: inline-block;

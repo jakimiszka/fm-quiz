@@ -56,11 +56,17 @@
 
       <!-- template-qestion -->
       <div class="template-question">
-        <p class="template-question--title">
-          Question <a class="question_number">1</a> of 10
-        </p>
-        <p class="template-question--question">What is the correct HTML element for inserting a line break?</p>
-        <div class="progress-bar">------------- timer -------------</div>
+        <div>
+          <p class="template-question--title">
+            Question <a class="question_number">1</a> of 10
+          </p>
+          <p class="template-question--question">What is the correct HTML element for inserting a line break?</p>
+          </div>
+          <div class="progress-bar">
+            <input class="progress-bar--fill" type="range" min="0" max="100" value="0" />
+          </div>
+          
+     
       </div>
 
       <!-- template-quiz -->
@@ -88,6 +94,10 @@
           <button class="submit_btn" data-bind="submit.value">
             Submit Answer
           </button>
+          <div class="submitValidation">
+            <img src="../assets/images/icon-error.svg" alt="anwer icon"/> 
+            <p>Please select an answer.</p>
+          </div>
         </div>
 
          <!-- template-results-title -->
