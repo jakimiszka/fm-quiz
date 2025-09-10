@@ -10,7 +10,7 @@ class DataStore{
     }
 
     init(){
-        fetch('http://jakimiszka.github.io/fm-quiz/data.json')
+        fetch('https://jakimiszka.github.io/fm-quiz/data.json')
         .then(response => response.json())
         .then(data => {
             this.data = data;
