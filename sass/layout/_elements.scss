@@ -76,3 +76,9 @@ input[type='range']::-webkit-slider-runnable-track {
   background-repeat: no-repeat;
   border-radius: 5px;
 }
+
+.progress-bar{
+   @include u.breakpoint(large){
+        margin-top: 3rem;
+    }
+}

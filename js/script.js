@@ -167,6 +167,7 @@ submit_btn.addEventListener("click", (e) => {
       handleCorrectAnswer(selectedOption, true);
     } else {
       handleCorrectAnswer(selectedOption, false);
+      // find correct answer
       options.forEach((option) => {
         const optionContent = option.querySelector(".answer_content").textContent;
         if (optionContent === questionAnswer) {
@@ -174,7 +175,7 @@ submit_btn.addEventListener("click", (e) => {
         }
       });
     }
-    // TODO: any info to user that next question is going to be loaded?
+   
     setTimeout(() => {
       const question_index = dataStore.nextQuestion();
       const question = dataStore.getQuestion(question_index);
@@ -188,4 +189,4 @@ submit_btn.addEventListener("click", (e) => {
   }
 });
 
-export { displayResults, updateQuiz };
+export { displayResults, updateQuiz, handleCorrectAnswer };
