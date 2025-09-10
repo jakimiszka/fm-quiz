@@ -1,23 +1,23 @@
 @font-face {
   font-family: "Rubik-Italic-static";
-  src: url("../assets/fonts/static/Rubik-Italic.ttf") format("truetype");
+  src: url("https://jakimiszka.github.io/fm-quiz/assets/assets/fonts/static/Rubik-Italic.ttf") format("truetype");
   font-weight: 200;
 }
 @font-face {
   font-family: "Rubik-Medium-static";
-  src: url("../assets/fonts/static/Rubik-Medium.ttf") format("truetype");
+  src: url("https://jakimiszka.github.io/fm-quiz/assets/assets/fonts/static/Rubik-Medium.ttf") format("truetype");
 }
 @font-face {
   font-family: "Rubik-Regular-static";
-  src: url("../assets/fonts/static/Rubik-Regular.ttf") format("truetype");
+  src: url("https://jakimiszka.github.io/fm-quiz/assets/assets/fonts/static/Rubik-Regular.ttf") format("truetype");
 }
 @font-face {
   font-family: "Rubik-Italic";
-  src: url("../assets/fonts/Rubik-Italic-VariableFont_wght.ttf") format("truetype");
+  src: url("https://jakimiszka.github.io/fm-quiz/assets/assets/fonts/Rubik-Italic-VariableFont_wght.ttf") format("truetype");
 }
 @font-face {
   font-family: "Rubik";
-  src: url("../assets/fonts/Rubik-VariableFont_wght.ttf") format("truetype");
+  src: url("https://jakimiszka.github.io/fm-quiz/assets/assets/fonts/Rubik-VariableFont_wght.ttf") format("truetype");
 }
 html {
   box-sizing: border-box; /* padding and border are included in the width */
@@ -265,6 +265,7 @@ a:active {
 .template-question--title {
   font-size: 0.875rem;
   color: var(--question-number);
+  margin-bottom: 1rem;
 }
 .template-question--question {
   font-size: 36px;

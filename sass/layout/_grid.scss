@@ -152,6 +152,7 @@
     &--title{
         font-size: g.$font-size-4-mobile;
         color: var(--question-number);
+        margin-bottom: u.$spacing-200;
     }
 
     &--question{
