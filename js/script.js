@@ -36,6 +36,10 @@ const inputTimer = document.querySelector("input[type='range']");
 import DataStore from './dataStore.js';
 const dataStore = new DataStore();
 
+// timer
+import QuizTimer from './quizTimer.js';
+let quizTimer = new QuizTimer(inputTimer, dataStore);
+
 function displayQuiz(){
     title_card.style.display = 'none';
     question_card.style.display = 'none';
@@ -49,7 +53,6 @@ function displayResults(score){
     results_title.style.display = 'flex';
     results_score.style.display = 'flex';
     const quiz = dataStore.getCategoryQuestions(dataStore.getCategory());
-    console.log(quiz);
     updateHeader(quiz.icon, quiz.title);
     score_number.textContent = score;
 }
@@ -65,7 +68,7 @@ function updateHeader(imgPath, category){
 function updateTitleAndQuiestion(question, number){
     quiz_question.textContent = question;
     qestion_number.textContent = number;
-    startTimer();
+    quizTimer.startTimer();
 }
 
 function updateOptions(options){
@@ -126,8 +129,8 @@ toggle.addEventListener('change', () => {
   document.body.setAttribute('data-theme', theme);
 });
 
+// PLAY AGAIN
 restart_btn.addEventListener('click', ()=>{
-    //reset everything
     dataStore.resetCounter();
     dataStore.answers = [];
     results_title.style.display = 'none';
@@ -137,20 +140,18 @@ restart_btn.addEventListener('click', ()=>{
     title.style.display = 'none';
 });
 
-// improve with first arg
+// improve with first arg - error proune
 function handleCorrectAnswer(optionBtn, isSelected, isCorrect){
     const selectedBtn = isSelected ? document.querySelector('.answer_btn.selected') : optionBtn;
     const answer_option = selectedBtn.querySelector('.asnwer_option');
     const answerIcon = selectedBtn.querySelector('.answer_icon');
 
     if(isCorrect){
-        // show correct answer
         answerIcon.src = '../assets/images/icon-correct.svg';
         selectedBtn.classList.add('correct');
         answer_option.classList.add('correct_option');
         answerIcon.style.display = 'block';
     }else{
-        // show wrong answer
         answerIcon.src = '../assets/images/icon-error.svg';
         selectedBtn.classList.add('wrong');
         answer_option.classList.add('wrong_option');
@@ -158,10 +159,12 @@ function handleCorrectAnswer(optionBtn, isSelected, isCorrect){
     }
 }
 
+// SUBMIT ANSWER
 submit_btn.addEventListener('click', ()=>{
     const question = dataStore.getQuestion(dataStore.getCounter());
     const questionAnswer = question.answer;
     const quiz_counter = dataStore.getCounter();
+
     let selectedOption = null;
     const answerContent = !!selectedOption ? selectedOption.textContent : null;
 
@@ -176,9 +179,10 @@ submit_btn.addEventListener('click', ()=>{
           submitValidation.style.display = 'flex';
           return;
       }else{
-          stopTimer();
+          // TODO: refactor - bug: if user asnwer good  - option is higlighted as wrong
+          quizTimer.stopTimer();
           if(answerContent !== questionAnswer){
-              handleCorrectAnswer(null ,true, false);
+              handleCorrectAnswer(selectedOption ,true, false);
 
               // find good answer and highlight it
               answer_btns.forEach(option => {
@@ -189,7 +193,7 @@ submit_btn.addEventListener('click', ()=>{
               });
           }else{
             dataStore.saveAnswer(true);
-            handleCorrectAnswer(null, true, true);
+            handleCorrectAnswer(selectedOption, true, true);
           }
 
           //TODO: freeze options during timeout
@@ -207,13 +211,10 @@ submit_btn.addEventListener('click', ()=>{
         }
 });
 
-
-
-
+// TIMER UTILS
 function setBackgroundSize(input) {
   input.style.setProperty("--background-size", `${getBackgroundSize(input)}%`);
 }
-
 function getBackgroundSize(input) {
   const min = +input.min || 0;
   const max = +input.max || 100;
@@ -223,38 +224,5 @@ function getBackgroundSize(input) {
 
   return size;
 }
-let timer = null;
-let size = 0;
 
-function startTimer() {
-  if (timer !== null) {
-    clearInterval(timer);
-  }
-  size = 0;
-  timer = setInterval(() => {
-    size = size + 1;
-    if (size > 100) {
-      clearInterval(timer);
-      size = 0;
-      const nextQuestionIndex = dataStore.nextQuestion();
-      const question = dataStore.getQuestion(nextQuestionIndex);
-      if (nextQuestionIndex >= dataStore.question_amount) {
-        console.log('quiz completed - ur score is ' + dataStore.answers.length);
-        displayResults(dataStore.answers.length);
-      } else {
-        updateTitleAndQuiestion(question.question, nextQuestionIndex + 1);
-        updateOptions(question.options);
-      }
-    }
-    inputTimer.value = size;
-    setBackgroundSize(inputTimer);
-    console.log(size);
-  }, 100);
-}
-
-function stopTimer() {
-  if (timer !== null) {
-    clearInterval(timer);
-    timer = null;
-  }
-}
+export { displayResults, updateTitleAndQuiestion, updateOptions, setBackgroundSize};
