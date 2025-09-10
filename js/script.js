@@ -127,12 +127,12 @@ function handleCorrectAnswer(optionBtn, isCorrect) {
   const answer_option = optionBtn.querySelector(".asnwer_option");
   const answerIcon = optionBtn.querySelector(".answer_icon");
   if (isCorrect) {
-    answerIcon.src = "../assets/images/icon-correct.svg";
+    answerIcon.src = "/assets/images/icon-correct.svg";
     optionBtn.classList.add("correct");
     answer_option.classList.add("correct_option");
     answerIcon.style.display = "block";
   } else {
-    answerIcon.src = "../assets/images/icon-error.svg";
+    answerIcon.src = "/assets/images/icon-error.svg";
     optionBtn.classList.add("wrong");
     answer_option.classList.add("wrong_option");
     answerIcon.style.display = "block";
