@@ -1,4 +1,4 @@
-import { displayResults, updateTitleAndQuiestion, updateOptions } from './script.js';
+import { displayResults, updateQuiz } from './script.js';
 
 class QuizTimer{
     constructor(inputTimer, dataStore){
@@ -24,8 +24,7 @@ class QuizTimer{
                 if (nextQuestionIndex >= this.dataStore.question_amount) {
                     displayResults(quizScore);
                 } else {
-                    updateTitleAndQuiestion(question.question, nextQuestionIndex + 1);
-                    updateOptions(question.options);
+                    updateQuiz(question.question, nextQuestionIndex + 1, question.options);
                 }
             }
             this.inputTimer.value = this.size;
