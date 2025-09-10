@@ -1,43 +1,28 @@
+import DataStore from './dataStore.js';
+import QuizTimer from './quizTimer.js';
+
 const toggle = document.querySelector('input[type="checkbox"]');
 const btns = document.querySelectorAll('.btn');
-// title
 const title = document.querySelector('.main-card__header--title');
 const category_icon = document.querySelectorAll('.category_icon');
 const category_title = document.querySelectorAll('.category_title');
-// categories page
 const title_card = document.querySelector('.main-card__main--wrapper');
 const question_card = document.querySelector('.main-card__main--topics');
-// quiz templates
 const question = document.querySelector('.template-question');
 const options = document.querySelector('.template-quiz');
-//quiz question and number
 const quiz_question = document.querySelector('.template-question--question');
 const qestion_number = document.querySelector('.question_number');
-// quiz answers
 const answer_btns = document.querySelectorAll('.answer_btn');
 const answer_content = document.querySelectorAll('.answer_content');
-// answer icons
-// const answer_icons = document.querySelector('.answer_icon');
-// submit asnwer
 const submit_btn = document.querySelector('.submit_btn');
-// results
 const results_title = document.querySelector('.template-results-title');
 const results_score = document.querySelector('.template-results-score');
-// score
 const score_number = document.querySelector('.score--number');
-// restart
 const restart_btn = document.querySelector('.restart_btn');
-// submit validation
 const submitValidation = document.querySelector('.submitValidation');
-//timer
 const inputTimer = document.querySelector("input[type='range']");
 
-// DATA STORE
-import DataStore from './dataStore.js';
 const dataStore = new DataStore();
-
-// timer
-import QuizTimer from './quizTimer.js';
 let quizTimer = new QuizTimer(inputTimer, dataStore);
 
 function displayQuiz(){
@@ -112,6 +97,7 @@ btns.forEach(btn => {
 // PICK ANSWER
 answer_btns.forEach(btn => {
     btn.addEventListener('click', (e)=>{
+        submit_btn.disabled = false;
         btn.classList.toggle('selected');
         submitValidation.style.display = 'none';
         answer_btns.forEach(btn => {
@@ -140,89 +126,70 @@ restart_btn.addEventListener('click', ()=>{
     title.style.display = 'none';
 });
 
-// improve with first arg - error proune
-function handleCorrectAnswer(optionBtn, isSelected, isCorrect){
-    const selectedBtn = isSelected ? document.querySelector('.answer_btn.selected') : optionBtn;
-    const answer_option = selectedBtn.querySelector('.asnwer_option');
-    const answerIcon = selectedBtn.querySelector('.answer_icon');
+// HANDLE CORRECT - WRONG ANSWER
+function handleCorrectAnswer(optionBtn, isCorrect){
+    const answer_option = optionBtn.querySelector('.asnwer_option');
+    const answerIcon = optionBtn.querySelector('.answer_icon');
 
     if(isCorrect){
         answerIcon.src = '../assets/images/icon-correct.svg';
-        selectedBtn.classList.add('correct');
+        optionBtn.classList.add('correct');
         answer_option.classList.add('correct_option');
         answerIcon.style.display = 'block';
     }else{
         answerIcon.src = '../assets/images/icon-error.svg';
-        selectedBtn.classList.add('wrong');
+        optionBtn.classList.add('wrong');
         answer_option.classList.add('wrong_option');
         answerIcon.style.display = 'block';
     }
 }
 
 // SUBMIT ANSWER
-submit_btn.addEventListener('click', ()=>{
+submit_btn.addEventListener('click', (e)=>{
+    submit_btn.disabled = true;
     const question = dataStore.getQuestion(dataStore.getCounter());
     const questionAnswer = question.answer;
     const quiz_counter = dataStore.getCounter();
 
     let selectedOption = null;
-    const answerContent = !!selectedOption ? selectedOption.textContent : null;
-
     const options = document.querySelectorAll('.answer_btn');
     options.forEach(option => {
         if(option.classList.contains('selected')){
             selectedOption = option;
         }
     });
+    const answerContent = !!selectedOption ? selectedOption.querySelector('.answer_content').textContent : null;
 
       if(selectedOption == null){
           submitValidation.style.display = 'flex';
           return;
       }else{
-          // TODO: refactor - bug: if user asnwer good  - option is higlighted as wrong
           quizTimer.stopTimer();
-          if(answerContent !== questionAnswer){
-              handleCorrectAnswer(selectedOption ,true, false);
-
-              // find good answer and highlight it
-              answer_btns.forEach(option => {
-                const answerContent = option.querySelector('.answer_content').textContent;
-                if(answerContent === questionAnswer){
-                    handleCorrectAnswer(option, false, true);
-                }
-              });
+          if(answerContent === questionAnswer){
+              dataStore.saveAnswer(true);
+              handleCorrectAnswer(selectedOption, true);              
           }else{
-            dataStore.saveAnswer(true);
-            handleCorrectAnswer(selectedOption, true, true);
+            handleCorrectAnswer(selectedOption, false);
+            options.forEach(option => {
+                const optionContent = option.querySelector('.answer_content').textContent;
+                if(optionContent === questionAnswer){
+                    handleCorrectAnswer(option, true);
+                }
+            });
           }
 
-          //TODO: freeze options during timeout
           setTimeout(() => {
               const question_index = dataStore.nextQuestion();
               const question = dataStore.getQuestion(question_index);
                 if(quiz_counter >= dataStore.question_amount - 1){
-                    console.log('quiz completed - ur score is ' + dataStore.answers.length);
                     displayResults(dataStore.answers.length);
                 }else{
                     updateTitleAndQuiestion(question.question, question_index + 1);
                     updateOptions(question.options);
-                }    
+                }
+                submit_btn.disabled = false;    
           }, 2000);
         }
 });
 
-// TIMER UTILS
-function setBackgroundSize(input) {
-  input.style.setProperty("--background-size", `${getBackgroundSize(input)}%`);
-}
-function getBackgroundSize(input) {
-  const min = +input.min || 0;
-  const max = +input.max || 100;
-  const value = +input.value;
-
-  const size = (value - min) / (max - min) * 100;
-
-  return size;
-}
-
-export { displayResults, updateTitleAndQuiestion, updateOptions, setBackgroundSize};
+export { displayResults, updateTitleAndQuiestion, updateOptions};

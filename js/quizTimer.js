@@ -1,4 +1,4 @@
-import { displayResults, updateTitleAndQuiestion, updateOptions, setBackgroundSize } from './script.js';
+import { displayResults, updateTitleAndQuiestion, updateOptions } from './script.js';
 
 class QuizTimer{
     constructor(inputTimer, dataStore){
@@ -18,10 +18,10 @@ class QuizTimer{
             if (this.size > 100) {
                 clearInterval(this.timer);
                 this.size = 0;
-                const nextQuestionIndex = dataStore.nextQuestion();
-                const question = dataStore.getQuestion(nextQuestionIndex);
-                const quizScore = dataStore.answers.length
-                if (nextQuestionIndex >= dataStore.question_amount) {
+                const nextQuestionIndex = this.dataStore.nextQuestion();
+                const question = this.dataStore.getQuestion(nextQuestionIndex);
+                const quizScore = this.dataStore.answers.length
+                if (nextQuestionIndex >= this.dataStore.question_amount) {
                     displayResults(quizScore);
                 } else {
                     updateTitleAndQuiestion(question.question, nextQuestionIndex + 1);
@@ -30,7 +30,6 @@ class QuizTimer{
             }
             this.inputTimer.value = this.size;
             setBackgroundSize(this.inputTimer);
-            console.log(this.size);
         }, 100);    
     }
 
@@ -42,43 +41,18 @@ class QuizTimer{
     }
 }
 
+// TIMER UTILS
+function setBackgroundSize(input) {
+  input.style.setProperty("--background-size", `${getBackgroundSize(input)}%`);
+}
+function getBackgroundSize(input) {
+  const min = +input.min || 0;
+  const max = +input.max || 100;
+  const value = +input.value;
 
+  const size = (value - min) / (max - min) * 100;
 
-
-// let timer = null;
-// let size = 0;
-
-// function startTimer() {
-//   if (timer !== null) {
-//     clearInterval(timer);
-//   }
-//   size = 0;
-//   timer = setInterval(() => {
-//     size = size + 1;
-//     if (size > 100) {
-//       clearInterval(timer);
-//       size = 0;
-//       const nextQuestionIndex = dataStore.nextQuestion();
-//       const question = dataStore.getQuestion(nextQuestionIndex);
-//       if (nextQuestionIndex >= dataStore.question_amount) {
-//         console.log('quiz completed - ur score is ' + dataStore.answers.length);
-//         displayResults(dataStore.answers.length);
-//       } else {
-//         updateTitleAndQuiestion(question.question, nextQuestionIndex + 1);
-//         updateOptions(question.options);
-//       }
-//     }
-//     inputTimer.value = size;
-//     setBackgroundSize(inputTimer);
-//     console.log(size);
-//   }, 100);
-// }
-
-// function stopTimer() {
-//   if (timer !== null) {
-//     clearInterval(timer);
-//     timer = null;
-//   }
-// }
+  return size;
+}
 
 export default QuizTimer;
